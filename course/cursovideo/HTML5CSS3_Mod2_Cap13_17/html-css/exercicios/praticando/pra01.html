@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display</title>
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <style>
+    .main {
+      width: 100%;
+      height: 100%;
+      /* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+      display: flex;
+      flex-direction: initial;
+      justify-content: space-between;
+      align-items: center;
+      align-content: space-around;
+    }
+
+    .d1 {
+      width: 60px;
+      height: 180px;
+      background-color: blueviolet;
+    }
+
+    .d2 {
+      width: 200px;
+      height: 200px;
+      background-color: blue;
+      color: aqua;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .d3 {
+      width: 180px;
+      order: -1;
+      height: 120px;
+      background-color: cadetblue;
+      align-self: flex-end;
+      display: block;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: unset;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main">
+    <div class="d1">
+
+    </div>
+
+    <div class="d2">
+      <p>Johnathan</p>
+      <p>Alexandra</p>
+      <p>Verônica</p>
+      <p>Anelise</p>
+
+    </div>
+
+    <div class="d3">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae explicabo officia quia ullam magnam
+        necessitatibus ratione expedita quos similique dolorum vitae unde omnis maiores facilis eius doloremque ipsa,
+        dolore corporis!</p>
+    </div>
+  </div>
+
+</body>
+
+</html>

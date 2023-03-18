@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS</title>
+
+  <style>
+    body {
+      margin: 0 auto;
+    }
+
+    /* Margin: 0 auto - Centralize um elemento block definindo sua margin-left 
+    e margin-right como auto 
+    https://www.instagram.com/p/Cp5DKoqs0Qn/?utm_source=ig_web_copy_link 
+    
+    */
+    .center {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+    }
+
+    /* Elemento c/ Largura e altura fixo */
+    .elemento-pai {
+      position: absolute;
+    }
+
+    .elemento-filho {
+      width: 36px;
+      height: 36px;
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      margin: -18px 0 0 -18px;
+    }
+
+    /* Display: flex - Centralize em ambas as direções com flexbox usando as duas propriedade de centralização */
+
+    .elemento-pai2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Display: grid - Para centralizar em ambas direções com grid, você deve utilizar essas propriedades. */
+    .elemento-pai3 {
+      display: grid;
+      place-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="center" style="background-color: brown;">
+
+  </div>
+
+  <div class="elemento-pai" style="background-color: blueviolet; width: 200px; height: 200px;">
+    <div class="elemento-filho" style="background-color: aqua;"></div>
+  </div>
+
+  <div class="elemento-pai2" style="background-color: cadetblue; width: 600px; height: 600px;">
+    <div style="background-color: beige; width: 80px; height: 80px;"></div>
+    <div style="background-color: azure; width: 150px; height: 150px;"></div>
+    <div style="background-color: burlywood; width: 130px; height: 35px; margin: 2px;"></div>
+
+  </div>
+
+  <div class="elemento-pai3" style="background-color: black; width: 200px; height: 200px;">
+    <div style="background-color: aqua; width: 20px; height: 20px;"></div>
+    <div style="background-color: blue; width: 30px; height: 30px;"></div>
+    <div style="background-color: red; width: 40px; height: 40px;"></div>
+  </div>
+</body>
+
+</html>

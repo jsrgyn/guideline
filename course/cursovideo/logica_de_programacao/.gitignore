@@ -1,0 +1,8 @@
+# https://www.atlassian.com/br/git/tutorials/saving-changes/gitignore
+
+# Pasta de node modules
+*node_modules/*
+
+
+
+

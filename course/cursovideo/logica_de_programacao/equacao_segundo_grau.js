@@ -41,9 +41,29 @@ console.log('-----------------------');
 var a = prompt('Informe o valor de A: ');
 var b = prompt('Informe o valor de B: ');
 var c = prompt("Informe o valor de C: ");
-console.log('---------------------');
+console.log('-----------------------');
 
+console.log(`Sua equacao é: ${a}×2 + ${b}x + ${c} = 0`);
 
-console.log('Valor de A:', a);
-console.log('Valor de B:', b);
-console.log('Valor de C:', c);
+var delta = (b*b) - 4*a*c
+
+console.log(`Valor de Delta: ${delta.toFixed(2)}`);
+  
+console.log('-----------------------');
+
+if (delta < 0) {
+  console.log('Para Delta negativo, nao existem raizes Reais');
+} else if (delta === 0) {
+  let x1 = (-b + Math.sqrt(delta)) / (2*a)
+  console.log(`Para Delta zero, temos duas raizes iguais a , ${x1}`);
+} else {
+  let x1 = (-b + Math.sqrt(delta)) / (2*a);
+  let x2 = (-b - Math.sqrt(delta)) / (2*a);
+  console.log('Para Delta positivo. Raizes diferentes:');
+  console.log(`×' = ${x1.toFixed(2)}`);
+  console.log(`×'' = ${x2.toFixed(2)}`);
+}
+
+console.log('');
+console.log('*** Fim da execução.');
+console.log('*** Feche esta janela para retornar ao Visualg.');

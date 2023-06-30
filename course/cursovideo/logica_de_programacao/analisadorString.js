@@ -11,10 +11,13 @@ console.log(`A seu nome tem a letra A na posição ${N.indexOf('a')}`);
 console.log(`O codigo da letra A é: ${'A'.charCodeAt()}`);
 console.log(`A letra de codigo 65 é ${String.fromCharCode(65)}`);
 
-con
+console.log('Slice de 7 e 1:', N.split(7, 1))
 
-for (let C = N.length; C <= 1; C--) {
-  var x = N.toUpperCase().split(C, 1)
+var x = '';
+
+for (let C = N.length; C >= 1; C--) {
+  // x = x + N.toUpperCase().substring(C - 1, C)
+  x = x + N.toUpperCase()[C - 1];
 }
 
 console.log(x);

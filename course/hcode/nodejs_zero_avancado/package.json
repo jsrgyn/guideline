@@ -1,0 +1,23 @@
+{
+  "name": "nodejs_zero_avancado",
+  "version": "1.0.0",
+  "description": "Curso avançado de NodeJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "npm",
+    "express",
+    "fs",
+    "path",
+    "url",
+    "mongodb",
+    "udp",
+    "crypto"
+  ],
+  "author": "Johnathan Silva",
+  "license": "MIT"
+}

@@ -2,8 +2,7 @@
 
 
 node_modules/
+tmp/
 
 *.zip
 *.rar
-
-

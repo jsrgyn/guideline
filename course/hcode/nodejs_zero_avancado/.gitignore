@@ -6,5 +6,9 @@ tmp/
 resultado/
 ffmpeg/
 
+
+.DS_Store
+
+
 *.zip
 *.rar

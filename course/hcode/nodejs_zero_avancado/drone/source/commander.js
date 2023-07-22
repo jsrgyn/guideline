@@ -90,6 +90,30 @@ class Commander {
     })
   }
 
+  sendCw(distance=20){
+    return new Promise((res, rej) => {
+      this.socket.send(`cw ${distance}`, 0, `cw ${distance}`.length, this.port, this.host, (err) => {
+        if(err) {
+          return rej(err)
+        } else {
+          return res()
+        }
+      })
+    })
+  }
+
+  sendCcw(distance=20){
+    return new Promise((res, rej) => {
+      this.socket.send(`ccw ${distance}`, 0, `ccw ${distance}`.length, this.port, this.host, (err) => {
+        if(err) {
+          return rej(err)
+        } else {
+          return res()
+        }
+      })
+    })
+  }
+
   sendFlip(){
     return new Promise((res, rej) => {
       this.socket.send(`flip b`, 0, `flip b`.length, this.port, this.host, (err) => {

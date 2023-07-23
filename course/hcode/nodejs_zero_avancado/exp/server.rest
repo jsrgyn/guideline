@@ -1,0 +1,24 @@
+### get routes principal
+GET http://localhost:3000
+### get usuarios
+GET http://localhost:3000/usuarios
+### get usuarios com id
+GET http://localhost:3000/usuarios/250
+### get admin
+GET http://localhost:3000/admin
+### get admin com id
+GET http://localhost:3000/admin/250
+### acessando via post
+POST http://localhost:3000/admin
+Content-Type: application/json
+
+{
+  "login":"glaucindaniel",
+  "senha":"123456"
+}
+### patch admin com id
+PATCH http://localhost:3000/admin/250
+### put admin com id
+PUT http://localhost:3000/admin/250
+### patch admin com id
+DELETE  http://localhost:3000/admin/250

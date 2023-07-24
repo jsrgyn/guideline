@@ -5,6 +5,7 @@ node_modules/
 tmp/
 resultado/
 ffmpeg/
+uploads/
 
 
 .DS_Store

@@ -7,7 +7,18 @@ const mongoose = require('mongoose')
 
 // mongoose.connect("mongodb://localhost/subscribers", {useNewUrlParser: true, useUnifiedTopology: true})
 
-mongoose.connect(process.env.DATABASE_STRING, {useNewUrlParser: true, useUnifiedTopology: true})
+// mongoose.connect(process.env.DATABASE_STRING, {useNewUrlParser: true, useUnifiedTopology: true, user: process.env.MONGO_USERNAME, pass: process.env.MONGO_PASSWORD})
+
+mongoose.connect(process.env.DATABASE_STRING, {
+  useNewUrlParser: true, 
+  useUnifiedTopology: true,
+  maxPoolSize: 10,
+  authSource: "admin",
+  user: process.env.MONGO_USERNAME,
+  pass: process.env.MONGO_PASSWORD
+})
+.then(() => console.log('Connected to DB'))
+.catch((e) => console.log(e));
 
 
 const db = mongoose.connection
@@ -23,4 +34,4 @@ app.use('/subscribers', subscribersRouter)
 app.listen(3000, ()=> 
   // console.log('Servidor está rodando!')
   console.log('Server running!')
-  )
+)

@@ -3,8 +3,20 @@ GET http://localhost:3000/subscribers
 ###
 POST http://localhost:3000/subscribers
 Content-Type: application/json
+
 {
-  "userName": "Djalma Sindeaux",
+  "userName": "José da Silva",
   "userChannel": "hcoderbrasil"
+}
+### acessando via GET com parametro
+GET http://localhost:3000/subscribers/64c1a91f0c2639a12dad2739
+### deletando via DELETE com parametro
+DELETE http://localhost:3000/subscribers/64c1b0fcc67adf714ba69858
+###
+PATCH  http://localhost:3000/subscribers/64c1aa3a0c2639a12dad2738
+Content-Type: application/json
+
+{
+  "userName": "João"
 }
 ###

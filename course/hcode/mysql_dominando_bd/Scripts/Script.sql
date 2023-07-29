@@ -92,6 +92,55 @@ SELECT name, salario as atual,
 CONVERT(salario * 1.1, dec(10,2)) as 'salario com aumento de 10%'
 from tb_funcionarios tf;
 
+use hcode;
+
+select * from tb_funcionarios where sexo = 'M';
+
+select * from tb_funcionarios where sexo != 'M';
+
+select * from tb_funcionarios where sexo <> 'M';
+
+select * from tb_funcionarios tf where sexo != 'M' and salario > 1000;
+
+update tb_funcionarios set salario = salario * 1.4 where id = 3;
+
+select * from tb_funcionarios tf where sexo != 'M' or salario > 1000;
+
+
+-- --------------------------------------
+
+-- 14. Where Like, Between e Soundex
+
+select * from tb_funcionarios tf where name like '%a%';
+
+select * from tb_funcionarios tf where name like '__V%';
+
+select * from tb_funcionarios tf where name not like 'j%';
+
+select * from tb_funcionarios tf where salario BETWEEN 1000 and 2000;
+
+select * from tb_funcionarios tf where salario not BETWEEN 1000 and 2000;
+
+select * from tb_funcionarios tf where SOUNDEX(name) = SOUNDEX('Luis');
+
+-- 15. Adicionando filtros com Datas
+
+select * from tb_funcionarios tf where cadastro > '2016-01-01';
+select * from tb_funcionarios tf where cadastro > '2016/01/01';
+select * from tb_funcionarios tf where cadastro > '2016.01.01';
+select * from tb_funcionarios tf where cadastro > '20160101';
+select * from tb_funcionarios tf where cadastro > '2016-01-01';
+
+update tb_funcionarios set admissao = CURRENT_DATE() where id = 1;
+update tb_funcionarios set admissao = DATE_ADD(CURRENT_DATE(), INTERVAL 60 day) where id = 2 ;
+
+
+
+
+
+
+
+
 
 
 

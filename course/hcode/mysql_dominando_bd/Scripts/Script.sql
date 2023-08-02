@@ -322,7 +322,74 @@ select * from v_pedidostotais where total > 7000;
 
 -- 26. Trabalhando com Stored Procedures
 
+drop procedure sp_pessoa_save;
 
+delimiter $$
+
+CREATE procedure sp_pessoa_save (
+pdesnome varchar(256)
+)
+begin 
+	insert into tb_pessoas values(null, pdesnome, current_date());
+
+	select * from tb_pessoas tp where idpessoa = LAST_INSERT_ID(); 
+end $$
+
+delimiter ;
+
+call sp_pessoa_save('Massaharu'); 
+
+-- 27. Comandos avançados para Stored Procedures
+
+drop procedure if exists sp_funcionario_save;
+
+delimiter $$;
+
+create procedure sp_funcionario_save (
+  pdesnome varchar(255),
+  pvlsalario decimal(10,2),
+  pdtadmissao datetime
+)
+begin
+	declare vidpessoa int;
+
+	start transaction;
+
+	set vidpessoa = (select idpessoa from tb_pessoas where desnome = pdesnome);	
+
+-- 	if not exists (select idpessoa from tb_pessoas where desnome = pdesnome) then
+    if not exists (vidpessoa) then
+	  
+		insert into tb_pessoas values(null, pdesnome, current_date());
+		set vidpessoa = LAST_INSERT_ID();
+	
+	else
+	   
+		select 'usuário já cadstrado!' as resultado;
+		rollback;
+	
+	end if;
+
+	if not exists (select idpessoa from tb_funcionarios where idpessoa = vidpessoa) then
+	  
+		insert into tb_funcionarios values(null, vidpessoa, pvlsalario, pdtadmissao);
+	
+	else
+	   
+		select 'usuário já cadstrado!' as resultado;
+		rollback;
+	
+	end if;
+
+	commit;
+	
+	select 'Dados cadastrados com sucesso!' as resultado;
+
+end $$
+
+delimiter ;
+
+call sp_funcionario_save('Joãoxx', 50000, CURRENT_DATE());
 
 
 

@@ -21,30 +21,8 @@
 				},
 				"auth-model": "native"
 			}
-		},
-		"mysql8-189b8e5f745-6586b1f74e69eca0": {
-			"provider": "mysql",
-			"driver": "mysql8",
-			"name": "localhost 1",
-			"save-password": true,
-			"configuration": {
-				"host": "127.0.0.1",
-				"port": "3306",
-				"url": "jdbc:mysql://127.0.0.1:3306/",
-				"configurationType": "MANUAL",
-				"home": "/opt/homebrew/Cellar/mysql-client/8.0.33_1/bin",
-				"type": "dev",
-				"properties": {
-					"connectTimeout": "20000",
-					"rewriteBatchedStatements": "true",
-					"enabledTLSProtocols": "TLSv1,TLSv1.1,TLSv1.2",
-					"allowPublicKeyRetrieval": "TRUE"
-				},
-				"auth-model": "native"
-			}
 		}
 	},
-	"virtual-models": {"mysql8-1899514c032-3034d59815121f86":{"hcode":{":tb_funcionarios":{"constraints":{"VIRTUAL_PK":{"type":"vpk","useAllColumns":true}}}}},"mysql8-189b8e5f745-6586b1f74e69eca0":{"hcode":{":tb_funcionarios":{"constraints":{"VIRTUAL_PK":{"type":"vpk","useAllColumns":true}}}}}},
 	"connection-types": {
 		"dev": {
 			"name": "Desenvolvimento",

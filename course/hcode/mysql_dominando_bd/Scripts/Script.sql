@@ -355,10 +355,12 @@ begin
 
 	start transaction;
 
-	set vidpessoa = (select idpessoa from tb_pessoas where desnome = pdesnome);	
+	select idpessoa into vidpessoa from tb_pessoas where desnome = pdesnome;	
+
+-- 	select CONCAT('Pessoa as cadastrado ', pdesnome, 'com cod: ', vidpessoa) as resultado;
 
 -- 	if not exists (select idpessoa from tb_pessoas where desnome = pdesnome) then
-    if not exists (vidpessoa) then
+    if (vidpessoa is null) then
 	  
 		insert into tb_pessoas values(null, pdesnome, current_date());
 		set vidpessoa = LAST_INSERT_ID();
@@ -374,22 +376,72 @@ begin
 	  
 		insert into tb_funcionarios values(null, vidpessoa, pvlsalario, pdtadmissao);
 	
+		commit;
+	
+    	select 'Dados cadastrados com sucesso!' as resultado;
+	
 	else
 	   
 		select 'usuário já cadstrado!' as resultado;
 		rollback;
 	
 	end if;
-
-	commit;
-	
-	select 'Dados cadastrados com sucesso!' as resultado;
-
 end $$
 
 delimiter ;
 
-call sp_funcionario_save('Joãoxx', 50000, CURRENT_DATE());
+call sp_funcionario_save('João sem', 50000, CURRENT_DATE());
+
+select * from tb_pessoas tp;
+
+select * from tb_funcionarios tf;
+
+-- 28. Criando Funções
+
+drop function if exists fn_imposto_renda;
+
+delimiter $$
+
+create function fn_imposto_renda (
+  pvlsalario decimal(10,2)
+)
+returns dec(10,2) deterministic
+begin 
+	
+	
+	declare vimposto decimal(10,2);
+	
+	/*
+	 
+	 até 1903,98 não paga imposto
+	 1903,99 até 2826,65 paga 7,5% deduzir do imposto 142,80
+	 2826,66 até 3751,05 paga 15% deduzir do imposto 354,80
+	 3751,66 até 4664,68 paga 22,5% deduzir do imposto 636,13
+	 acima 4664,68 paga 27,5% deduzir do imposto 869,36 
+	  
+	  */
+	
+	set vimposto = case 
+		when pvlsalario <= 1903.98 then 0
+		when pvlsalario >= 1903.99 and pvlsalario <= 2826.65 then (pvlsalario * .075) - 142.00
+		when pvlsalario >= 2826.66 and pvlsalario <= 3751.05 then (pvlsalario * .15) - 354.80
+		when pvlsalario >= 3751.06 and pvlsalario <= 4664.68 then (pvlsalario * .225) - 636.13
+		when pvlsalario >= 4664.68 then (pvlsalario * .275) - 869.36
+	end;
+
+	return vimposto;
+end $$ 
+
+delimiter ;
+
+select *, fn_imposto_renda(a.vlsalario) as vlimposto from tb_funcionarios a 
+inner join tb_pessoas b using(idpessoa);
+
+-- 29. Encerramento
+
+-- 30. Registro e Hospedagem
+
+ 
 
 
 

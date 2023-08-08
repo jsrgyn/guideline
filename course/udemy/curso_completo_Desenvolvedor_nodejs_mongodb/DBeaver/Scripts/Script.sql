@@ -10,3 +10,9 @@ show tables;
 insert into noticias(titulo, noticia) values ('titulo da noticia', 'conteudo da noticia');
 
 select * from noticias n;
+
+insert into noticias(titulo, noticia) value ('Outra noticia', 'conteudo da outra noticia');
+
+select * from noticias n;
+
+SHOW FULL PROCESSLIST;

@@ -14,7 +14,7 @@
 		<tr>
 			<td>ID</td>
 			<td>Título</td>
-			<td>Noticia</td>
+			<!-- <td>Noticia</td> -->
 		</tr>
 
 		<% for(var i=0; i < noticias.length; i++) { %>
@@ -23,9 +23,13 @@
 				<!-- <td>1</td>
 				<td>Título da noticia</td>
 				<td>Conteudo</td> -->
-				<td><%= noticias[i].id_noticias %></td>
-				<td><%= noticias[i].titulo %></td>
-				<td><%= noticias[i].noticia %></td>
+				<td>
+					<%= noticias[i].id_noticias %>
+				</td>
+				<td>
+					<%= noticias[i].titulo %>
+				</td>
+				<!-- <td><%= noticias[i].noticia %></td> -->
 			</tr>
 
 			<% } %>

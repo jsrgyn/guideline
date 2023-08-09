@@ -29,13 +29,13 @@ var app = require('./config/server')
   res.render("noticias/noticias");
 }) */
 
-var rotaNoticias = require('./app/routes/noticias')(app);
+// var rotaNoticias = require('./app/routes/noticias')(app);
 // rotaNoticias(app);
 
-var rotaHome = require('./app/routes/home')(app);
+// var rotaHome = require('./app/routes/home')(app);
 // rotaHome(app);
 
-var rotaFormInclusaoNoticia = require('./app/routes/formulario_inclusao_noticia')(app);
+// var rotaFormInclusaoNoticia = require('./app/routes/formulario_inclusao_noticia')(app);
 // rotaFormInclusaoNoticia(app);
 
 

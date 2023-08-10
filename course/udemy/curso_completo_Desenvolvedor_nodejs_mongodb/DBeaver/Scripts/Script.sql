@@ -16,3 +16,5 @@ insert into noticias(titulo, noticia) value ('Outra noticia', 'conteudo da outra
 select * from noticias n;
 
 SHOW FULL PROCESSLIST;
+
+select * from noticias where id_noticias = 2;

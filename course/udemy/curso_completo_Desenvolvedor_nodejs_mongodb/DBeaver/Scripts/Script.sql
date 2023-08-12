@@ -18,3 +18,15 @@ select * from noticias n;
 SHOW FULL PROCESSLIST;
 
 select * from noticias where id_noticias = 2;
+
+
+use portal_noticias;
+
+alter table noticias add column resumo varchar(100);
+
+alter table noticias add column autor varchar(30);
+
+alter table noticias add column data_noticia date;
+
+select * from noticias n;
+

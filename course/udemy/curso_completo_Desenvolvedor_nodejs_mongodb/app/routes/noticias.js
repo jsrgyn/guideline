@@ -32,14 +32,21 @@
 
     var connection = application.config.dbConnection();
 
-    var noticiasModel = application.app.models.noticiasModel;
+    // var noticiasModel = application.app.models.noticiasModel;
+
+    // var noticiasModel = new application.app.models.noticiasModel;
+
+    var noticiasModel = new application.app.models.NoticiasDAO(connection);
 
     /* connection.query('select * from noticias', function(error, result){
       res.render("noticias/noticias", {noticias: result});
     }) */
 
-    noticiasModel.getNoticias(connection, function(error, result){
+    // noticiasModel.getNoticias(connection, function(error, result){
+    //   res.render("noticias/noticias", {noticias: result});
+
+    noticiasModel.getNoticias( function(error, result){
       res.render("noticias/noticias", {noticias: result});
   });
 });
-}
+};

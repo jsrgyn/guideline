@@ -30,23 +30,37 @@
 
   application.get('/noticias', function(req, res) {
 
-    var connection = application.config.dbConnection();
+  //   var connection = application.config.dbConnection();
 
-    // var noticiasModel = application.app.models.noticiasModel;
+  //   // var noticiasModel = application.app.models.noticiasModel;
 
-    // var noticiasModel = new application.app.models.noticiasModel;
+  //   // var noticiasModel = new application.app.models.noticiasModel;
 
-    var noticiasModel = new application.app.models.NoticiasDAO(connection);
+  //   var noticiasModel = new application.app.models.NoticiasDAO(connection);
 
-    /* connection.query('select * from noticias', function(error, result){
-      res.render("noticias/noticias", {noticias: result});
-    }) */
+  //   /* connection.query('select * from noticias', function(error, result){
+  //     res.render("noticias/noticias", {noticias: result});
+  //   }) */
 
-    // noticiasModel.getNoticias(connection, function(error, result){
-    //   res.render("noticias/noticias", {noticias: result});
+  //   // noticiasModel.getNoticias(connection, function(error, result){
+  //   //   res.render("noticias/noticias", {noticias: result});
 
-    noticiasModel.getNoticias( function(error, result){
-      res.render("noticias/noticias", {noticias: result});
-  });
+  //   noticiasModel.getNoticias( function(error, result){
+  //     res.render("noticias/noticias", {noticias: result});
+  // });
+  application.app.controllers.noticias.noticias(application, req, res);
 });
+
+application.get('/noticia', function(req, res) {
+
+//   var connection = application.config.dbConnection();
+
+//   var noticiasModel = new application.app.models.NoticiasDAO(connection);
+
+//   noticiasModel.getNoticia( function(error, result){
+//     res.render("noticias/noticia", {noticia: result});
+// })
+  application.app.controllers.noticias.noticia(application, req, res);
+});
+
 };

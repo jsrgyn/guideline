@@ -21,11 +21,14 @@ Noticias.prototype.salvarNoticia = function(noticia, connection, callback) {
 
 
 NoticiasDAO.prototype.getNoticias = function(callback) {
-  this._connection.query('select * from noticias', callback);
+  this._connection.query('select * from noticias order by id_noticias desc', callback);
 }
 
-NoticiasDAO.prototype.getNoticia = function(callback) {
-  this._connection.query('select * from noticias where id_noticias = 2', callback)
+NoticiasDAO.prototype.getNoticia = function(id_noticias, callback) {
+
+  console.log("id_noticias>>>>>", id_noticias.id_noticias, id_noticias);
+
+  this._connection.query('select * from noticias where id_noticias = ' + id_noticias.id_noticias, callback)
 
 }
 

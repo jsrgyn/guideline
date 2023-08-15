@@ -60,6 +60,7 @@ application.get('/noticia', function(req, res) {
 //   noticiasModel.getNoticia( function(error, result){
 //     res.render("noticias/noticia", {noticia: result});
 // })
+
   application.app.controllers.noticias.noticia(application, req, res);
 });
 

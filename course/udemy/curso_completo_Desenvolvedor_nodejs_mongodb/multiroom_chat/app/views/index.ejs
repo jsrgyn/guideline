@@ -41,25 +41,28 @@
                     </div>
                 </div>
 
-
                 <div>
                     <% if(validacao.length> 0) { %>
-
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="alert alert-danger">
-                                    <strong>
-                                        Atenção!
-                                    </strong>
+                                    <strong>Atenção!</strong>
+                                    <ul>
+                                        <% for(var i=0; i < validacao.length; i++) { %>
+                                            <li>
+                                                <%=validacao[i].msg%>
+                                            </li>
+                                            <% } %>
+                                    </ul>
                                 </div>
                             </div>
-                            <% } %>
                         </div>
-
+                        <% } %>
                 </div>
+
             </div>
         </div>
-
+    </div>
 </body>
 
 </html>

@@ -75,7 +75,7 @@
 		<div class="row conversa" id="conversa">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
-				<div class="dialogo">
+				<!-- <div class="dialogo">
 					<h4>Jorge</h4>
 					<p>Fala José, blz cara?</p>
 				</div>
@@ -98,7 +98,7 @@
 				<div class="dialogo">
 					<h4>Jorge</h4>
 					<p>Show de bola, comunicação bi-direcional em páginas ou sistemas web é muito bacana mesmo</p>
-				</div>
+				</div> -->
 			</div>
 			<div class="col-md-1"></div>
 
@@ -152,6 +152,13 @@
 
 	<script>
 		var socket = io('http://localhost');
+
+
+
+		socket.on('msgParaCliente', function (data) {
+			// alert('Recebi uma requisição do servidor e estou tomando uma ação');
+			alert(data);
+		})
 	</script>
 
 </body>

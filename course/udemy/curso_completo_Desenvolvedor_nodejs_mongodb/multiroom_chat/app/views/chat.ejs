@@ -74,7 +74,7 @@
 	<div class="container">
 		<div class="row conversa" id="conversa">
 			<div class="col-md-1"></div>
-			<div class="col-md-10">
+			<div class="col-md-10" id="dialogos">
 				<!-- <div class="dialogo">
 					<h4>Jorge</h4>
 					<p>Fala José, blz cara?</p>
@@ -130,16 +130,16 @@
 	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 		<div class="container">
 			<div class="panel-body campo-mensagem">
-				<form>
-					<div class="col-md-12">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Mensagem">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button">></button>
-							</span>
-						</div>
+				<!-- <form> -->
+				<div class="col-md-12">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Mensagem" id="mensagem">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" id="enviar_mensagem">></button>
+						</span>
 					</div>
-				</form>
+				</div>
+				<!-- </form> -->
 			</div>
 		</div>
 	</nav>
@@ -153,11 +153,26 @@
 	<script>
 		var socket = io('http://localhost');
 
+		$('enviar_mensagem').click(function () {
+			socket.emit(
+				'msgParaServidor',
+				{ apelido: '', mensaem: $('#mensagem').val() }
+			)
+		})
+
 
 
 		socket.on('msgParaCliente', function (data) {
 			// alert('Recebi uma requisição do servidor e estou tomando uma ação');
-			alert(data);
+			// alert(data);
+			var html = '';
+
+			html += '<div class="dialogo">';
+			html += '<h4>' + data.apelido + '</h4>';
+			html += '<p>' + data.mensagem + '</p>';
+			html += '</div>';
+
+			$('#dialogos').append(html);
 		})
 	</script>
 

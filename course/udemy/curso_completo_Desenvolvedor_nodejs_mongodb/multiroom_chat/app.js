@@ -38,6 +38,7 @@ io.on('connection', function(socket){
 
 
     /* Participantes */
+    if(parseInt(data.apelido_atualizado_nos_clientes) == 0 ) {
     socket.emit(
       'participantesParaCliente', 
       {apelido: data.apelido}
@@ -48,5 +49,7 @@ io.on('connection', function(socket){
       'participantesParaCliente', 
       {apelido: data.apelido}
     );
+
+    }
   })
 })

@@ -158,9 +158,17 @@
 		$('#enviar_mensagem').click(function () {
 			socket.emit(
 				'msgParaServidor',
-				{ apelido: $('#apelido').val(), mensagem: $('#mensagem').val() }
-			)
-		})
+				{
+					apelido: $('#apelido').val(),
+					mensagem: $('#mensagem').val(),
+					apelido_atualizado_nos_clientes: $('#apelido_atualizado_nos_clientes').val()
+				}
+			);
+
+			$('#mensagem').val("");
+			$('#apelido_atualizado_nos_clientes').val(1)
+
+		});
 
 
 
@@ -175,6 +183,8 @@
 			html += '</div>';
 
 			$('#dialogos').append(html);
+
+			window.scrollTo(0, document.body.scrollHeight);
 		})
 
 
@@ -183,6 +193,7 @@
 			var html = '';
 
 			html += '<span class="participante">';
+			html += '<img src="images/ico_usuario.png">';
 			html += data.apelido;
 			html += '</span>';
 

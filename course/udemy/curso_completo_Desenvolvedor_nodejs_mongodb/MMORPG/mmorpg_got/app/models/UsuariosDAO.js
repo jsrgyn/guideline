@@ -77,26 +77,59 @@ function UsuarioDAO(connection) {
   // }
 
 }
-  UsuarioDAO.prototype.inserirUsuario = async function(usuario) { 
+  UsuarioDAO.prototype.inserirUsuario = async function(usuarios, req) { 
     // console.log('This.Connection:', this._connection);
 
     await this._connection.connect();
 
-    const collection = await this._connection.getDatabase().collection('usuario');
+    const collection = await this._connection.getDatabase().collection('usuarios');
 
 
     // console.log('collection:', collection)
 
     try {
       // await collection.insertOne(usuario);
-      collection.insertOne(usuario);
+      await collection.insertOne(usuarios);
       console.log('Usuário inserido com sucesso');
     } catch (error) {
       console.error('Erro ao inserir usuário:', error);
     }
+
+    await this._connection.closeConnection();
   }
 
   // Outros métodos para manipulação de usuários
+
+  UsuarioDAO.prototype.autenticar = async function(usuarios, req, res) { 
+    console.log(usuarios);
+
+    await this._connection.connect();
+
+    const collection = await this._connection.getDatabase().collection('usuarios');
+
+    try {
+      const result = await collection.find(usuarios).toArray();
+      console.log('Resultado da consulta:', result);
+
+      if(result[0] !=  undefined) {
+        req.session.autorizado = true;
+        req.session.usuario = result[0].usuario;
+        req.session.casa = result[0].casa;
+      }
+
+    } catch (error) {
+      console.error('Erro ao pesquisar usuário:', error);
+    }
+
+    if(req.session.autorizado) {
+      // res.send('usuário foi encontrado no banco de dados');
+      res.redirect("jogo");
+    } else {
+      // res.send('usuário não existe no banco de dados');
+      res.render('index', {validacao: {}});
+    }
+    await this._connection.closeConnection();
+  }
 
 
 // module.exports = UsuariosDAO;

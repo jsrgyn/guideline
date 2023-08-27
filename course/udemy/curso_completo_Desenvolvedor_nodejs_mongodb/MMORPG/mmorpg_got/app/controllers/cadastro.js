@@ -29,7 +29,11 @@ module.exports.cadastrar = async function(application, req, res) {
 
   UsuarioDAO.inserirUsuario(dadosForm); */
 
-  const { nome, email, senha } = req.body;
+  // const { nome, email, senha } = req.body;
+
+  var dadosForm = req.body;
+
+  console.log(dadosForm);
 
   const connection = application.config.dbConnection;
 
@@ -38,10 +42,9 @@ module.exports.cadastrar = async function(application, req, res) {
 
   const usuariosDAO = new application.app.models.UsuariosDAO(connection);
 
-  const novoUsuario = { nome, email, senha };
-  usuariosDAO.inserirUsuario(novoUsuario);
+  // const novoUsuario = { nome, email, senha };
+  await usuariosDAO.inserirUsuario(dadosForm);
 
   res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso' });
-
   // res.send('podemos cadastrar')
 }

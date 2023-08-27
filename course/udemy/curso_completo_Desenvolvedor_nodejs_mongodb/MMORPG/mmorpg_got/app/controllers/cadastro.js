@@ -2,7 +2,7 @@ module.exports.cadastro = function(application, req, res) {
   res.render('cadastro', {validacao: {}, dadosForm: {}});
 }
 
-module.exports.cadastrar = function(application, req, res) {
+module.exports.cadastrar = async function(application, req, res) {
   // res.send('teste - vamos cadastrar');
 
   var dadosForm = req.body;
@@ -22,5 +22,26 @@ module.exports.cadastrar = function(application, req, res) {
     return;
   }
 
-  res.send('podemos cadastrar')
+  /* var connection = application.config.dbConnection;
+  console.log(connection);
+
+  var UsuarioDAO = new application.app.models.UsuariosDAO(conne);
+
+  UsuarioDAO.inserirUsuario(dadosForm); */
+
+  const { nome, email, senha } = req.body;
+
+  const connection = application.config.dbConnection;
+
+  console.log('Cadastro:', connection)
+
+
+  const usuariosDAO = new application.app.models.UsuariosDAO(connection);
+
+  const novoUsuario = { nome, email, senha };
+  usuariosDAO.inserirUsuario(novoUsuario);
+
+  res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso' });
+
+  // res.send('podemos cadastrar')
 }

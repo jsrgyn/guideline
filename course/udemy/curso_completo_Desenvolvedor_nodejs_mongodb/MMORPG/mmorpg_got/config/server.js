@@ -34,5 +34,11 @@ consign()
 	.then('app/controllers')
 	.into(app);
 
+/* consign()
+  // .include('config/dbConnection.js') // Certifique-se de que 'config' é o diretório correto
+  .include('app/models')
+  .include('app/controllers')
+  .into(app);
+ */
 /* exportar o objeto app */
 module.exports = app;

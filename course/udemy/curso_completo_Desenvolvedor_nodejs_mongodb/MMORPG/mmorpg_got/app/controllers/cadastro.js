@@ -42,8 +42,11 @@ module.exports.cadastrar = async function(application, req, res) {
 
   const usuariosDAO = new application.app.models.UsuariosDAO(connection);
 
+  const jogoDAO = new application.app.models.JogoDAO(connection);
+
   // const novoUsuario = { nome, email, senha };
   await usuariosDAO.inserirUsuario(dadosForm);
+  await jogoDAO.geraParametros(dadosForm.usuario);
 
   res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso' });
   // res.send('podemos cadastrar')

@@ -20,7 +20,9 @@
 		$(document).ready(function () {
 			$('#btn_sair').click(function () {
 				window.location.href = '/sair';
-			})
+			});
+
+			parei aqui...
 		})
 	</script>
 
@@ -47,22 +49,30 @@
 				<div class="row barra-superior">
 					<div class="col-sm-2">
 						<img src="images/habilidades/temor.jpg" title="Temor" alt="Temor" />
-						<span>754</span>
+						<span>
+							<%=jogo.temor%>
+						</span>
 					</div>
 
 					<div class="col-sm-2">
 						<img src="images/habilidades/sabedoria.jpg" title="Sabedoria" alt="Sabedoria" />
-						<span>754</span>
+						<span>
+							<%=jogo.sabedoria%>
+						</span>
 					</div>
 
 					<div class="col-sm-2">
 						<img src="images/habilidades/comercio.jpg" title="Comércio" alt="Comércio" />
-						<span>754</span>
+						<span>
+							<%=jogo.comercio%>
+						</span>
 					</div>
 
 					<div class="col-sm-2">
 						<img src="images/habilidades/magia.jpg" title="Magia" alt="Magia" />
-						<span>754</span>
+						<span>
+							<%=jogo.magia%>
+						</span>
 					</div>
 				</div>
 			</div>
@@ -71,7 +81,7 @@
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-9">
-				<div class="acoes"></div>
+				<div class="acoes" id="acoes">Senhor, o que deseja fazer hoje?</div>
 			</div>
 		</div>
 
@@ -82,18 +92,23 @@
 
 			<div class="row">
 				<div class="col-sm-1">
-					<img src="images/outros/suditos.jpg" title="Aldeões" alt="Aldeões" />
+					<img src="images/outros/suditos.jpg" title="Aldeões" alt="Aldeões" id="btn_suditos" />
+					<span>
+						<%=jogo.suditos%>
+					</span>
 				</div>
 
 				<div class="col-sm-1">
-					<img src="images/outros/pergaminho.jpg" title="Pergaminhos" alt="Pergaminhos" />
+					<img src="images/outros/pergaminho.jpg" title="Pergaminhos" alt="Pergaminhos" id="btn_pergaminho" />
 				</div>
 
 				<div class="col-sm-8"></div>
 
 				<div class="col-sm-2">
 					<img src="images/outros/moeda.jpg" title="Moeda" alt="Moeda" />
-					<span>25</span>
+					<span>
+						<%=jogo.moeda%>
+					</span>
 				</div>
 
 			</div>

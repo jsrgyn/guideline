@@ -29,7 +29,7 @@ JogoDAO.prototype.geraParametros = async function(usuario){
     await this._connection.closeConnection();
 }
 
-JogoDAO.prototype.iniciaJogo = async function(res, usuario, casa){
+JogoDAO.prototype.iniciaJogo = async function(res, usuario, casa, msg){
   // console.log('Iniciar os parâmetros do jogo');
 
   await this._connection.connect();
@@ -42,11 +42,45 @@ JogoDAO.prototype.iniciaJogo = async function(res, usuario, casa){
     console.log('Resultado da consulta:', result);
     // return result;
 
-    res.render('jogo', {img_casa: casa, jogo: result[0]});
+    // res.render('jogo', {img_casa: casa, jogo: result[0], comando_invalido: comando_invalido});
+
+    res.render('jogo', {img_casa: casa, jogo: result[0], msg: msg});
 
   } catch (error) {
     console.error('Erro ao pesquisar usuário:', error);
   }
+}
+
+JogoDAO.prototype.acao = async function(acao){
+  console.log(acao);
+
+  await this._connection.connect();
+
+    const collection = await this._connection.getDatabase().collection('acao');
+
+    try {
+
+      var date = new Date();
+
+      var tempo = null;
+
+      switch(acao.acao){
+        case 1: tempo = 1 * 60 * 60000;
+        case 2: tempo = 2 * 60 * 60000;
+        case 3: tempo = 5 * 60 * 60000;
+        case 4: tempo = 5 * 60 * 60000;
+      }
+      acao.acao_termina_em = date.getTime() + tempo;
+    
+      await collection.insertOne(acao);
+      console.log('Ação do Jogo inserido com sucesso');
+    } catch (error) {
+      console.error('Erro ao inserir as ações do Jogo:', error);
+    }
+
+    await this._connection.closeConnection();
+
+  
 }
 
 module.exports = function(){

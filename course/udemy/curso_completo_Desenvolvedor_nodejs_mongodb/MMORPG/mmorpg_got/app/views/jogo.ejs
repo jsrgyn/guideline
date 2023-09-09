@@ -49,10 +49,35 @@
 					method: 'get',
 					success: function (data) {
 						$('#acoes').html(data);
+
+						clearTimeout(timerId);
+
+						cronometro();
 					}
 				})
 			})
 		})
+
+		var timerId = null;
+
+
+		function cronometro() {
+			$('.tempo_restante').each(function () {
+				var segundos = $(this).html();
+				var segundos_atuais = parseInt(segundos) - 1;
+
+				// alert(segundos);
+
+				if (segundos_atuais < 0) {
+					window.location.href = '/jogo?msg=C';
+				} else {
+
+					$(this).html(segundos_atuais);
+				}
+			})
+
+			timerId = setTimeout('cronometro()', 1000);
+		}
 	</script>
 
 </head>

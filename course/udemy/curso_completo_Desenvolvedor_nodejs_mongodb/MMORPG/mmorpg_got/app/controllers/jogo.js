@@ -52,12 +52,22 @@ module.exports.suditos = function(application, req, res) {
     res.render("aldeoes", {validacao: {}})
 }
 
-module.exports.pergaminhos = function(application, req, res) {
+module.exports.pergaminhos = async function(application, req, res) {
   if(req.session.autorizado !== true) {
     res.send('Usuário precisa fazer login');
     return;
   }
-  res.render("pergaminhos", {validacao: {}})
+
+  /* Recuperar as ações inseridas no banco de dados */
+  const connection = application.config.dbConnection;
+  const JogoDAO = new application.app.models.JogoDAO(connection);
+
+  var usuario = req.session.usuario;
+  
+  await JogoDAO.getAcoes(usuario, res);
+
+
+  // res.render("pergaminhos", {validacao: {}})
 }
 
 module.exports.ordenar_acao_sudito = async function(application, req, res) {

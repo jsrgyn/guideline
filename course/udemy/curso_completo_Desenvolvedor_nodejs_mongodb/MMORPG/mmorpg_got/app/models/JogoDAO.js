@@ -64,11 +64,11 @@ JogoDAO.prototype.acao = async function(acao){
 
       var tempo = null;
 
-      switch(acao.acao){
-        case 1: tempo = 1 * 60 * 60000;
-        case 2: tempo = 2 * 60 * 60000;
-        case 3: tempo = 5 * 60 * 60000;
-        case 4: tempo = 5 * 60 * 60000;
+      switch(parseInt(acao.acao)){
+        case 1: tempo = 1 * 60 * 60000; break;
+        case 2: tempo = 2 * 60 * 60000; break;
+        case 3: tempo = 5 * 60 * 60000; break;
+        case 4: tempo = 5 * 60 * 60000; break;
       }
       acao.acao_termina_em = date.getTime() + tempo;
     
@@ -81,6 +81,31 @@ JogoDAO.prototype.acao = async function(acao){
     await this._connection.closeConnection();
 
   
+}
+
+JogoDAO.prototype.getAcoes = async function(usuario, res){
+  // console.log('Recuperar ações');
+
+   // console.log('Iniciar os parâmetros do jogo');
+
+   await this._connection.connect();
+
+   const collection = await this._connection.getDatabase().collection('acao');
+
+   var date = new Date();
+   var momento_atual = date.getTime();
+
+ 
+   try {
+     const result = await collection.find({usuario: usuario, acao_termina_em: {$gt:momento_atual}}).toArray();
+     await this._connection.closeConnection();
+     console.log('Resultado da consulta:', result);
+
+     res.render("pergaminhos", {acoes: result})
+ 
+   } catch (error) {
+     console.error('Erro ao pesquisar usuário:', error);
+   }
 }
 
 module.exports = function(){

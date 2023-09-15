@@ -100,3 +100,11 @@ module.exports.ordenar_acao_sudito = async function(application, req, res) {
 
   res.redirect('jogo?msg=B');
 }
+
+
+module.exports.revogar_acao = async function(application, req, res) {
+  var url_query = req.query;
+  console.log('url_query:', req.query)
+  res.send(url_query);
+
+ }

@@ -56,7 +56,7 @@ JogoDAO.prototype.acao = async function(acao){
 
   await this._connection.connect();
 
-    const collection = await this._connection.getDatabase().collection('acao');
+    let collection = await this._connection.getDatabase().collection('acao');
 
     try {
 
@@ -77,6 +77,20 @@ JogoDAO.prototype.acao = async function(acao){
     } catch (error) {
       console.error('Erro ao inserir as ações do Jogo:', error);
     }
+
+    collection = await this._connection.getDatabase().collection('jogo');
+
+    var moedas = null;
+    switch(parseInt(acao.acao)){
+      case 1: moedas = -2 * acao.quantidade; break;
+      case 2: moedas = -3 * acao.quantidade; break;
+      case 3: moedas = -1 * acao.quantidade; break;
+      case 4: moedas = -1 * acao.quantidade; break;
+    }
+
+    await collection.updateOne(
+      {usuario: acao.usuario}, 
+      {$inc: {moeda: moedas}});
 
     await this._connection.closeConnection();
 

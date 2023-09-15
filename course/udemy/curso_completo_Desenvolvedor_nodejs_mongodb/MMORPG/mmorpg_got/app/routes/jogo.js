@@ -20,4 +20,9 @@ application.app.controllers.jogo.sair(application, req, res)
 					application.post('/ordenar_acao_sudito', function(req, res){
 						application.app.controllers.jogo.ordenar_acao_sudito(application, req, res)
 							});
+
+
+							application.get('/revogar_acao', function(req, res){
+								application.app.controllers.jogo.revogar_acao(application, req, res)
+									});
 }

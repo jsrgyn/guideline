@@ -105,6 +105,13 @@ module.exports.ordenar_acao_sudito = async function(application, req, res) {
 module.exports.revogar_acao = async function(application, req, res) {
   var url_query = req.query;
   console.log('url_query:', req.query)
-  res.send(url_query);
+  // res.send(url_query);
+
+  const connection = application.config.dbConnection;
+  const JogoDAO = new application.app.models.JogoDAO(connection);
+
+  var _id = url_query.id_acao;
+  JogoDAO.revogarAcao(_id, res);
+
 
  }

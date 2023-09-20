@@ -1,3 +1,5 @@
+var ObjectID = require('mongodb').ObjectId;
+
 function JogoDAO(connection){
   this._connection = connection;
 } 
@@ -121,6 +123,31 @@ JogoDAO.prototype.getAcoes = async function(usuario, res){
      console.error('Erro ao pesquisar usuário:', error);
    }
 }
+
+JogoDAO.prototype.revogarAcao = async function(_id, res){
+  // res.send(_id);
+  await this._connection.connect();
+
+   const collection = await this._connection.getDatabase().collection('acao');
+
+   try {
+    const result = await collection.deleteOne({_id : new ObjectID(_id)});
+
+
+    console.log(result);
+
+ if (result && result.acknowledged) {
+  res.redirect("jogo?msg=D");
+
+ }
+
+ await this._connection.closeConnection();
+
+ } catch (error) {
+  console.error('Erro ao pesquisar usuário:', error);
+ }
+}
+
 
 module.exports = function(){
   return JogoDAO;

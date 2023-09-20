@@ -69,6 +69,10 @@ module.exports = UsuariosDAO; */
 
 // Em algum controlador (por exemplo, cadastroController.js)
 
+/* Importar o módulo do crypto  */
+
+var crypto = require('crypto');
+
 function UsuarioDAO(connection) {
 
 // class UsuariosDAO {
@@ -87,6 +91,17 @@ function UsuarioDAO(connection) {
 
     // console.log('collection:', collection)
 
+    console.log(usuarios);
+
+    console.log(usuarios.senha);
+
+    let senha_criptografada = crypto.createHash("md5").update(usuarios.senha).digest("hex");
+
+    console.log('Senha criptografada: ', senha_criptografada);
+
+    usuarios.senha = senha_criptografada;
+
+
     try {
       // await collection.insertOne(usuario);
       await collection.insertOne(usuarios);
@@ -102,6 +117,10 @@ function UsuarioDAO(connection) {
 
   UsuarioDAO.prototype.autenticar = async function(usuarios, req, res) { 
     console.log(usuarios);
+
+    let senha_criptografada = crypto.createHash("md5").update(usuarios.senha).digest("hex");
+
+    usuarios.senha = senha_criptografada;
 
     await this._connection.connect();
 

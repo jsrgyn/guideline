@@ -24,3 +24,7 @@ tmp/
 resultado/
 ffmpeg/
 uploads/
+.DS_Store
+course/.DS_Store
+course/cursovideo/.DS_Store
+course/cursovideo/.DS_Store

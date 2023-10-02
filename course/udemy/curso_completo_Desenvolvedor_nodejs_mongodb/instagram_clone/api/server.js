@@ -37,7 +37,13 @@ app.get('/', function(req, res){
 // POST (create)
 app.post('/api', async function(req, res){
 
+  // res.setHeader("Access-Control-Allow-Origen", "http://localhost:80")
+
+  res.setHeader("Access-Control-Allow-Origen", "*");
+
   var dados = req.body;
+
+  console.log('Dados:', dados);
 
   await bd.connect();  
   

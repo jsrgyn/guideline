@@ -4,7 +4,8 @@ var mongodb = require('mongodb'); */
 
 var express = require('express'),
     bodyParser = require('body-parser'),
-    dbConect = require('./dbConnection.js');
+    dbConect = require('./dbConnection.js'),
+    objectId = require('mongodb').ObjectId;
     // mongodb = require('mongodb');
 
 var app = express();
@@ -67,6 +68,61 @@ app.get('/api', async function(req, res){
     console.log(dados);
 
     res.json(dados)
+  } catch (error) {
+    res.json(error)
+  }
+  await bd.closeConnection();
+})
+
+// GET by ID (ready)
+app.get('/api/:id', async function(req, res){
+  await bd.connect();  
+  
+  const collection = await bd.getDatabase().collection('postagens');
+
+  console.log('Postagem', req.params.id, new objectId(req.params.id));
+
+  try {
+    const dados = await collection.find(new objectId(req.params.id)).toArray();
+    
+    console.log(dados);
+
+    // res.json(dados)
+    res.status(200).json(dados)
+  } catch (error) {
+    res.json(error)
+  }
+  await bd.closeConnection();
+})
+
+// PUT by ID (update)
+app.put('/api/:id', async function(req, res){
+  await bd.connect();  
+  
+  console.log('Body:', req.body, req.body.titulo, new objectId(req.params.id))
+
+  const collection = await bd.getDatabase().collection('postagens');
+
+  try {
+
+    var dados = await collection.updateOne({_id : new objectId(req.params.id)}, {$set : {titulo : req.body.titulo}});
+      res.json(dados);
+  } catch (error) {
+    res.json(error)
+  }
+  await bd.closeConnection();
+})
+
+// DELETE by ID (remover)
+app.delete('/api/:id', async function(req, res){
+  await bd.connect();  
+
+  const collection = await bd.getDatabase().collection('postagens');
+
+  try {
+
+    var dados = await collection.deleteOne({_id : new objectId(req.params.id)});
+      res.json(dados);
   } catch (error) {
     res.json(error)
   }

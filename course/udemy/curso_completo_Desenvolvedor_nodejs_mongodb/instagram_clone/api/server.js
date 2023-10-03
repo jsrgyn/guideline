@@ -4,8 +4,10 @@ var mongodb = require('mongodb'); */
 
 var express = require('express'),
     bodyParser = require('body-parser'),
+    multioarty = require('connect-multiparty'),
     dbConect = require('./dbConnection.js'),
-    objectId = require('mongodb').ObjectId;
+    objectId = require('mongodb').ObjectId,
+    fs = require('fs');
     // mongodb = require('mongodb');
 
 var app = express();
@@ -13,6 +15,7 @@ var app = express();
 //body-parser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(multioarty());
 
 var port = 8080;
 
@@ -44,6 +47,17 @@ app.post('/api', async function(req, res){
   var dados = req.body;
 
   console.log('Dados:', dados);
+  console.log(req.files);
+
+  var path_origem = req.files.arquivo.path;
+  var path_destino = './uploads/' + req.files.arquivo.originalFilename;
+
+  fs.rename(path_origem, path_destino, function(err, ){
+    if(err){
+      res.status(500).json({error: err});
+      return;
+    }
+  })
 
   await bd.connect();  
   

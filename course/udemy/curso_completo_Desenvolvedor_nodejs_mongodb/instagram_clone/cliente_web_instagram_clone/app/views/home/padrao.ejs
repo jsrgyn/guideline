@@ -50,6 +50,9 @@
 					xhr.onreadystatechange = function () {
 						if (xhr.readyState == 4) {
 							var resposta = xhr.responseText;
+
+							console.log('Passei aqui', resposta)
+							alert(resposta);
 							document.getElementById('mensagem').innerHTML = resposta;
 						}
 					}

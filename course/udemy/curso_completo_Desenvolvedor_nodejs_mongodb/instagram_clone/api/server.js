@@ -4,7 +4,7 @@ var mongodb = require('mongodb'); */
 
 var express = require('express'),
     bodyParser = require('body-parser'),
-    multioarty = require('connect-multiparty'),
+    multiparty = require('connect-multiparty'),
     dbConect = require('./dbConnection.js'),
     objectId = require('mongodb').ObjectId,
     fs = require('fs');
@@ -15,7 +15,7 @@ var app = express();
 //body-parser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(multioarty());
+app.use(multiparty());
 
 var port = 8080;
 
@@ -44,20 +44,27 @@ app.post('/api', async function(req, res){
 
   res.setHeader("Access-Control-Allow-Origen", "*");
 
-  var dados = req.body;
+  // var dados = req.body;
 
-  console.log('Dados:', dados);
+  // console.log('Dados:', dados);
   console.log(req.files);
 
-  var path_origem = req.files.arquivo.path;
+/*   var path_origem = req.files.arquivo.path;
   var path_destino = './uploads/' + req.files.arquivo.originalFilename;
+
+  var url_imagem = req.files.arquivo.originalFilename;
 
   fs.rename(path_origem, path_destino, function(err, ){
     if(err){
       res.status(500).json({error: err});
       return;
     }
-  })
+  }) */
+
+  var dados = {
+    // url_imagem : url_imagem,
+    titulo : req.body.titulo
+  }
 
   await bd.connect();  
   

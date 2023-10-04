@@ -42,14 +42,14 @@ app.post('/api', async function(req, res){
 
   // res.setHeader("Access-Control-Allow-Origen", "http://localhost:80")
 
-  res.setHeader("Access-Control-Allow-Origen", "*");
+  res.setHeader("Access-Control-Allow-Origin", "*");
 
   // var dados = req.body;
 
   // console.log('Dados:', dados);
   console.log(req.files);
 
-/*   var path_origem = req.files.arquivo.path;
+  var path_origem = req.files.arquivo.path;
   var path_destino = './uploads/' + req.files.arquivo.originalFilename;
 
   var url_imagem = req.files.arquivo.originalFilename;
@@ -59,10 +59,10 @@ app.post('/api', async function(req, res){
       res.status(500).json({error: err});
       return;
     }
-  }) */
+  })
 
   var dados = {
-    // url_imagem : url_imagem,
+    url_imagem : url_imagem,
     titulo : req.body.titulo
   }
 

@@ -51,8 +51,13 @@
 						if (xhr.readyState == 4) {
 							var resposta = xhr.responseText;
 
-							console.log('Passei aqui', resposta)
-							alert(resposta);
+							// console.log('Passei aqui', resposta)
+
+							/* if(xhr.status == 200){
+								console.log('==200 :', resposta)
+							} */
+
+							// alert(resposta);
 							document.getElementById('mensagem').innerHTML = resposta;
 						}
 					}

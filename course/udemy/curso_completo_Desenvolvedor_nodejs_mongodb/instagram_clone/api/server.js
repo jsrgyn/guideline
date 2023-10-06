@@ -44,15 +44,21 @@ app.post('/api', async function(req, res){
 
   res.setHeader("Access-Control-Allow-Origin", "*");
 
+  var date = new Date();
+  time_stamp = date.getTime();
+
   // var dados = req.body;
 
   // console.log('Dados:', dados);
   console.log(req.files);
+  
+  var url_imagem = time_stamp
+  + '_' + req.files.arquivo.originalFilename;
 
   var path_origem = req.files.arquivo.path;
-  var path_destino = './uploads/' + req.files.arquivo.originalFilename;
-
-  var url_imagem = req.files.arquivo.originalFilename;
+  // var path_destino = './uploads/' + req.files.arquivo.originalFilename;
+  var path_destino = './uploads/' + url_imagem;
+  
 
   fs.rename(path_origem, path_destino, function(err, ){
     if(err){
@@ -85,6 +91,9 @@ app.post('/api', async function(req, res){
 
 // GET (ready)
 app.get('/api', async function(req, res){
+
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   await bd.connect();  
   
   const collection = await bd.getDatabase().collection('postagens');
@@ -99,6 +108,14 @@ app.get('/api', async function(req, res){
     res.json(error)
   }
   await bd.closeConnection();
+})
+
+app.get('/uploads/:imagem', function(req, res){
+  var img = req.params.imagem;
+
+  fs.readFile('./uploads/'+img, function(err, content){
+    
+  })
 })
 
 // GET by ID (ready)

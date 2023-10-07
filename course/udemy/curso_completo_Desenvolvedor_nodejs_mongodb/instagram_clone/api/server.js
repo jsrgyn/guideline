@@ -17,6 +17,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(multiparty());
 
+app.use(function(req, res, next){
+
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
+  res._construct. 
+
+  next();
+
+});
+
 var port = 8080;
 
 app.listen(port);
@@ -42,7 +52,7 @@ app.post('/api', async function(req, res){
 
   // res.setHeader("Access-Control-Allow-Origen", "http://localhost:80")
 
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  // res.setHeader("Access-Control-Allow-Origin", "*");
 
   var date = new Date();
   time_stamp = date.getTime();
@@ -92,7 +102,7 @@ app.post('/api', async function(req, res){
 // GET (ready)
 app.get('/api', async function(req, res){
 
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  // res.setHeader("Access-Control-Allow-Origin", "*");
 
   await bd.connect();  
   
@@ -110,11 +120,17 @@ app.get('/api', async function(req, res){
   await bd.closeConnection();
 })
 
-app.get('/uploads/:imagem', function(req, res){
+app.get('/imagens/:imagem', function(req, res){
   var img = req.params.imagem;
 
   fs.readFile('./uploads/'+img, function(err, content){
+    if(err){
+      res.status(400).json(err);
+        return;
+    }
     
+    res.writeHead(200, {'content-type': 'image/jpg'})
+    res.end(content);
   })
 })
 
@@ -146,7 +162,7 @@ app.put('/api/:id', async function(req, res){
   console.log('Body:', req.body, req.body.titulo, new objectId(req.params.id))
 
   const collection = await bd.getDatabase().collection('postagens');
-
+/* 
   try {
 
     var dados = await collection.updateOne({_id : new objectId(req.params.id)}, {$set : {titulo : req.body.titulo}});
@@ -154,6 +170,10 @@ app.put('/api/:id', async function(req, res){
   } catch (error) {
     res.json(error)
   }
+   */
+
+  res.send('rota para atualização');
+
   await bd.closeConnection();
 })
 

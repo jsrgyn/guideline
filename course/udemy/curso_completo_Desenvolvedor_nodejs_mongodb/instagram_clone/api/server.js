@@ -160,18 +160,24 @@ app.get('/api/:id', async function(req, res){
 app.put('/api/:id', async function(req, res){
   await bd.connect();  
   
-  console.log('Body:', req.body, req.body.titulo, new objectId(req.params.id))
+  // console.log('Body:', req.body, req.body.titulo, new objectId(req.params.id))
 
   const collection = await bd.getDatabase().collection('postagens');
 
   try {
 
-    var dados = await collection.updateOne({_id : new objectId(req.params.id)}, {$set : {titulo : req.body.titulo}});
+    var dados = await collection.updateOne(
+      {_id : new objectId(req.params.id)}, 
+      {$push : {
+        comentarios : {
+          id_comentario : new objectId(),
+          comentario: req.body.comentario
+        }
+      }});
       res.json(dados);
   } catch (error) {
     res.json(error)
   }
-  
 
   // res.send('rota para atualização ' + req.params.id + ' - ' + req.body.comentario);
 
@@ -182,7 +188,7 @@ app.put('/api/:id', async function(req, res){
 app.delete('/api/:id', async function(req, res){
   await bd.connect();  
 
-  const collection = await bd.getDatabase().collection('postagens');
+  /* const collection = await bd.getDatabase().collection('postagens');
 
   try {
 
@@ -190,6 +196,25 @@ app.delete('/api/:id', async function(req, res){
       res.json(dados);
   } catch (error) {
     res.json(error)
+  } */
+
+  const collection = await bd.getDatabase().collection('postagens');
+
+  try {
+
+    var dados = await collection.updateOne(
+      {},
+      { $pull : {
+        comentarios: { id_comentario : new objectId(req.params.id) }
+      }
+    },
+    {multi: true});
+      res.json(dados);
+  } catch (error) {
+    res.json(error)
   }
+
+  // res.send(req.params.id);
+
   await bd.closeConnection();
 })

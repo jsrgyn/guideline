@@ -1,0 +1,12 @@
+nomedon init
+
+takeoff = decolar (Iniciar voo)
+land = descer
+forward = Ir para frente
+back = Ir para traz 
+right = Ir para direita
+left = Ir para esquerda
+cw = Girar para direita
+ccw = Girar para esquerda
+battery = Ver o status da battery
+flip = fazer flip

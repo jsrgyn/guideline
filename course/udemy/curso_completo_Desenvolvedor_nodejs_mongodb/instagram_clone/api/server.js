@@ -20,8 +20,9 @@ app.use(multiparty());
 app.use(function(req, res, next){
 
   res.setHeader("Access-Control-Allow-Origin", "*");
-
-  res._construct. 
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "content-type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
 
   next();
 
@@ -162,7 +163,7 @@ app.put('/api/:id', async function(req, res){
   console.log('Body:', req.body, req.body.titulo, new objectId(req.params.id))
 
   const collection = await bd.getDatabase().collection('postagens');
-/* 
+
   try {
 
     var dados = await collection.updateOne({_id : new objectId(req.params.id)}, {$set : {titulo : req.body.titulo}});
@@ -170,9 +171,9 @@ app.put('/api/:id', async function(req, res){
   } catch (error) {
     res.json(error)
   }
-   */
+  
 
-  res.send('rota para atualização');
+  // res.send('rota para atualização ' + req.params.id + ' - ' + req.body.comentario);
 
   await bd.closeConnection();
 })

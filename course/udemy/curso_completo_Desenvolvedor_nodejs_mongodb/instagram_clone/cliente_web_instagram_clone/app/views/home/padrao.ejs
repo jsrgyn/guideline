@@ -61,7 +61,14 @@
 							var xhr = new XMLHttpRequest();
 
 							xhr.open('PUT', 'http://localhost:8080/api/' + id);
-							xhr.send();
+							// xhr.send('{ comentario :' + comentario +'});
+							xhr.setRequestHeader('Content-Type', 'application/json');
+
+							xhr.onload = function () {
+								alert(xhr.responseText);
+							}
+
+							xhr.send(JSON.stringify({ comentario: comentario }));
 						});
 
 					}

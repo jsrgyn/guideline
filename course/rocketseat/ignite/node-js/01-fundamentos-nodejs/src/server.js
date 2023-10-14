@@ -13,6 +13,8 @@ console.log(a + b); */
 
 import http from 'node:http';
 
+import { json } from './middlewares/json.js'
+
 // import fastify from 'fastify';
 
 /* - Criar usuários
@@ -45,12 +47,38 @@ import http from 'node:http';
 
 const users = [];
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const { method, url } = req
 
   console.log(req.headers);
 
   console.log(method, url);
+
+  /* 
+  const buffers = [];
+
+  for await (const chunk of req) {
+    buffers.push(chunk)
+  }
+ */
+
+  await json(req, res);
+
+  // const body = Buffer.concat(buffers).toString();
+  /* try {
+    // const body = JSON.parse(Buffer.concat(buffers).toString());
+    req.body = JSON.parse(Buffer.concat(buffers).toString());
+
+    console.log(req.body.name)
+    console.log(req.body)
+  } catch {
+    req.body = null
+
+  } */
+
+  
+  
+  
 
   if (method === 'GET' && url === '/users') {
 
@@ -62,11 +90,22 @@ const server = http.createServer((req, res) => {
   }
 
   if (method === 'POST' && url === '/users') {
+
+    const {name, email } = req.body;
+/* 
     users.push({
       id : 1,
       name : 'John Doe',
       email : 'johndoe@example.com'
     })
+ */
+
+    users.push({
+      id: 1,
+      name,
+      email,
+    })
+
 
     // return res.end('Criação de usuários')
     return res.writeHead(201).end();

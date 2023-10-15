@@ -13,7 +13,13 @@ console.log(a + b); */
 
 import http from 'node:http';
 
+import { randomUUID } from 'node:crypto';
+
+import { Database } from './database.js'
+
 import { json } from './middlewares/json.js'
+
+// UUID = Unique Universal ID
 
 // import fastify from 'fastify';
 
@@ -45,7 +51,9 @@ import { json } from './middlewares/json.js'
 
 // HTTP Status Code
 
-const users = [];
+// const users = [];
+
+const database = new Database();
 
 const server = http.createServer(async (req, res) => {
   const { method, url } = req
@@ -84,8 +92,11 @@ const server = http.createServer(async (req, res) => {
 
     // Early return
     // return res.end('Listagem de usuários')
+
+    const users = database.select('users')
+
     return res
-    .setHeader('Content-type', 'application/json')
+    // .setHeader('Content-type', 'application/json')
     .end(JSON.stringify(users))
   }
 
@@ -99,12 +110,21 @@ const server = http.createServer(async (req, res) => {
       email : 'johndoe@example.com'
     })
  */
-
+    /* 
     users.push({
       id: 1,
       name,
       email,
-    })
+    }) */
+
+    const user = {
+      // id: 1,
+      id: randomUUID(),
+      name,
+      email,
+    }
+
+    database.insert('users', user)
 
 
     // return res.end('Criação de usuários')

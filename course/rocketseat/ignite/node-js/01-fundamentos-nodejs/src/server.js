@@ -13,11 +13,13 @@ console.log(a + b); */
 
 import http from 'node:http';
 
-import { randomUUID } from 'node:crypto';
+/* import { randomUUID } from 'node:crypto';
 
-import { Database } from './database.js'
+import { Database } from './database.js' */
 
 import { json } from './middlewares/json.js'
+
+import { routes } from './routes.js'
 
 // UUID = Unique Universal ID
 
@@ -53,7 +55,7 @@ import { json } from './middlewares/json.js'
 
 // const users = [];
 
-const database = new Database();
+// const database = new Database();
 
 const server = http.createServer(async (req, res) => {
   const { method, url } = req
@@ -87,7 +89,7 @@ const server = http.createServer(async (req, res) => {
   
   
   
-
+/* 
   if (method === 'GET' && url === '/users') {
 
     // Early return
@@ -99,10 +101,11 @@ const server = http.createServer(async (req, res) => {
     // .setHeader('Content-type', 'application/json')
     .end(JSON.stringify(users))
   }
+   */
 
-  if (method === 'POST' && url === '/users') {
+  // if (method === 'POST' && url === '/users') {
 
-    const {name, email } = req.body;
+    // const {name, email } = req.body;
 /* 
     users.push({
       id : 1,
@@ -117,18 +120,35 @@ const server = http.createServer(async (req, res) => {
       email,
     }) */
 
-    const user = {
+    // const user = {
       // id: 1,
-      id: randomUUID(),
-      name,
-      email,
-    }
+      // id: randomUUID(),
+      // name,
+      // email,
+    // }
 
-    database.insert('users', user)
+    // database.insert('users', user)
 
 
     // return res.end('Criação de usuários')
-    return res.writeHead(201).end();
+    // return res.writeHead(201).end();
+  // }
+
+// Query Parameters : URL Stateful
+// Route Parameters :
+// Request Body :
+  
+  
+  // http://localhost:3333/users?userId=1&name=Diego
+
+  const route = routes.find(route => {
+    return route.method === method && route.path === url
+  });
+
+  console.log(route)
+
+  if (route) {
+    return route.handler(req, res)
   }
 
 

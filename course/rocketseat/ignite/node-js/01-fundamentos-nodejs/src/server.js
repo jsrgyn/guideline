@@ -134,12 +134,18 @@ const server = http.createServer(async (req, res) => {
     // return res.writeHead(201).end();
   // }
 
-// Query Parameters : URL Stateful
-// Route Parameters :
-// Request Body :
+// Query Parameters : URL Stateful → Filtros, paginação, não-obrigatóni
+// Route Parameters : Identificação de recurso
+// Request Body : Envio de informações de um formulário (HTTPs)
   
   
   // http://localhost:3333/users?userId=1&name=Diego
+  // GET http://Localhost:3333/users/1
+  // DELETE http: //localhost:3333/users/1
+
+  // POST http://localhost:3333/users
+  
+  // Edição e remoção
 
   const route = routes.find(route => {
     return route.method === method && route.path === url

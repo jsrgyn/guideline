@@ -148,10 +148,11 @@ const server = http.createServer(async (req, res) => {
   // Edição e remoção
 
   const route = routes.find(route => {
-    return route.method === method && route.path === url
+    // return route.method === method && route.path === url
+    return route.method === method && route.path.test(url);
   });
 
-  console.log(route)
+  console.log('Pasei aqui', route)
 
   if (route) {
     return route.handler(req, res)

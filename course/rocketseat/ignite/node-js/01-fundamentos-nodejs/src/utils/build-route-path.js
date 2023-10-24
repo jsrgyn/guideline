@@ -15,4 +15,6 @@ export function buildRoutePath(path){
   const pathRegex = new RegExp(`ˆ${pathWithParams}`)
 
   return pathRegex
+
+  // pathRegex.test()
 }

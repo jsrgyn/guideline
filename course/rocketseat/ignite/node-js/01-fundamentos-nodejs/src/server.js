@@ -149,18 +149,26 @@ const server = http.createServer(async (req, res) => {
 
   const route = routes.find(route => {
     // return route.method === method && route.path === url
+
+    // console.log('Teste', route.method, route.path.test(url));
     return route.method === method && route.path.test(url);
+    
+    // route.method === method && route.path.test(url);
   });
 
   console.log('Pasei aqui', route)
 
   if (route) {
+    const routeParams = req.url.match(route.path)
+
+    console.log(routeParams)
+
     return route.handler(req, res)
   }
 
 
   // return res.end('Hello World')
-  return res.writeHead(404).end('');
+  return res.writeHead(404).end();
 })
 
 

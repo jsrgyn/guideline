@@ -20,6 +20,7 @@ import { Database } from './database.js' */
 import { json } from './middlewares/json.js'
 
 import { routes } from './routes.js'
+import { extractQueryParams } from './utils/extract-query-params.js';
 
 // UUID = Unique Universal ID
 
@@ -165,8 +166,15 @@ const server = http.createServer(async (req, res) => {
 
     // console.log(routeParams.groups)
 
+    // console.log(extractQueryParams(routeParams.groups.query))
+
     // const params = {...routeParams.groups }
-    req.params = {...routeParams.groups }
+    // req.params = {...routeParams.groups }
+
+    const {query, ...params } = routeParams.groups;
+
+    req.params = params;
+    req.query = query ? extractQueryParams(query) : {};
 
     // console.log(params)
 

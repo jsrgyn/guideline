@@ -1,6 +1,7 @@
 import fastify from 'fastify'
-import crypto from 'node:crypto'
+// import crypto from 'node:crypto'
 import { knex } from './database'
+import { env } from './env'
 
 const app = fastify()
 
@@ -20,7 +21,7 @@ app.get('/hello', async () => {
   return tables
    */
 
-/* 
+  /* 
   const transaction = await knex('transactions').insert({
     id: crypto.randomUUID(),
     title: 'Transação de teste',
@@ -32,18 +33,30 @@ app.get('/hello', async () => {
 
   // const transactions = await knex('transactions').select('*')
   const transactions = await knex('transactions')
-  .where('amount', 500)
-  .select('*')
+    .where('amount', 500)
+    .select('*')
 
   return transactions
 })
 
-app
+/* app
   .listen({
     port: 3333,
+  })
+  .then(() => {
+    console.log('HTTP Server Running!')
+  }) */
+
+app
+  .listen({
+    port: env.PORT,
   })
   .then(() => {
     console.log('HTTP Server Running!')
   })
 
 // EcmaScript Lint
+
+// RF - Req. funcionais
+// RN - Regra de negocio
+// RNF - Req. Não funcionais
